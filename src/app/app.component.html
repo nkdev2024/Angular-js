@@ -4,6 +4,12 @@
   
 <div>
 <form class="example-form">
+
+  <mat-form-field class="example-full-width">
+    <mat-label>User Id</mat-label>
+    <input type="number" matInput placeholder="userId" value="">
+  </mat-form-field>
+
   <mat-form-field class="example-full-width">
     <mat-label>First Name</mat-label>
     <input matInput placeholder="ABCD" value="">
@@ -24,7 +30,7 @@
     <input type="password" matInput placeholder="password" value="">
   </mat-form-field>
 
-  <button mat-flat-button color="primary">Primary</button>
+  <button mat-flat-button color="primary" (click)="sendData()">Register</button>
 
 </form>
 </div>
