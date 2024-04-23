@@ -9,6 +9,8 @@ import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import {MatListModule} from '@angular/material/list';
+import { Observable } from 'rxjs';
+
 
 
 @Component({
@@ -88,18 +90,19 @@ export class AppComponent {
     );
   }
 
-  deleteItem(datas: any , i: any): void{
-    console.log(datas)
-    this.http.delete(`${this.backendUrl}/deleteUser?rollNumber=${datas.rollNumber}`, datas)
-    .subscribe(
-      (data) => {
-        console.log(data)
+  deleteItem(datas: any , i: any): void {
+  console.log(datas + i);
+  this.http.delete(`${this.backendUrl}/deleteUser?rollNumber=${datas.rollNumber}`)
+    .subscribe({
+      next: (response) => {
+        console.log('Response:', response);
         this.dataList.splice(i, 1);
+        console.log(this.dataList);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching data:', error);
       }
-    );
-  }
+    });
+}
   
 }
