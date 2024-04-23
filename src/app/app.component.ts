@@ -71,15 +71,35 @@ export class AppComponent {
       (error) => {
         console.error('Error fetching data:', error);
       }
-    );;
+    );
   }
 
-  updateItem(data: any): void{
-
+  updateItem(datas: any, i: any): void{
+    console.log(i)
+    this.http.put(`${this.backendUrl}/updateUser`, datas)
+    .subscribe(
+      (data) => {
+        console.log(data)
+        this.dataList[i] = data;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
   }
 
-  deleteItem(data: any): void{
-
+  deleteItem(datas: any , i: any): void{
+    console.log(datas)
+    this.http.delete(`${this.backendUrl}/deleteUser?rollNumber=${datas.rollNumber}`, datas)
+    .subscribe(
+      (data) => {
+        console.log(data)
+        this.dataList.splice(i, 1);
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
   }
   
 }

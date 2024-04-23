@@ -41,13 +41,13 @@
 <mat-card style="width: 40%; margin-top: 2rem;">
   <mat-card-content>List</mat-card-content>
   <mat-list role="list">
-    <mat-list-item *ngFor="let item of dataList" role="listitem">
+    <mat-list-item *ngFor="let item of dataList let i = index" role="listitem">
       <div style="display: flex; align-items: center;">
         <span>{{item.userId}} - {{item.firstName}} - {{item.lastName}} - {{item.rollNumber}}</span>
-        <button style="margin: 0 10px" mat-flat-button  color="primary" (click)="updateItem(item)">
+        <button style="margin: 0 10px" mat-flat-button  color="primary" (click)="updateItem(item, i)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-flat-button  color="warn" (click)="deleteItem(item)">
+        <button mat-flat-button  color="warn" (click)="deleteItem(item, i)">
           <mat-icon>delete</mat-icon>
         </button>
       </div>
