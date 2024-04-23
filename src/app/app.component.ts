@@ -74,5 +74,12 @@ export class AppComponent {
     );;
   }
 
+  updateItem(data: any): void{
+
+  }
+
+  deleteItem(data: any): void{
+
+  }
   
 }
