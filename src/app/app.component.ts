@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, NgModule, NO_ERRORS_SCHEMA, } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -7,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
+import {MatListModule} from '@angular/material/list';
 
 
 @Component({
@@ -17,12 +19,13 @@ import { HttpClient } from '@angular/common/http';
   providers: [
     HttpClientModule, // Enable fetch for HttpClient
   ],
-  imports: [RouterOutlet, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, HttpClientModule, ],
-  
+  imports: [RouterOutlet, CommonModule, MatListModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, HttpClientModule, ],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppComponent {
   title = 'my-angular-project';
   backendUrl = 'https://psychic-orbit-5gvjxx5gj9jrfq99-8080.app.github.dev';
+  dataList: any = [];
 
   constructor(private http: HttpClient) {}
 
@@ -55,6 +58,20 @@ export class AppComponent {
           // Handle error response from the server
         }
       );
+  }
+
+  fetchData(): void{
+      // Send data to the backend using HttpClient
+    this.http.get(`${this.backendUrl}/getAllusers`)
+    .subscribe(
+      (data) => {
+        console.log(data)
+        this.dataList = data;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );;
   }
 
   
