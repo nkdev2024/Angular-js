@@ -96,6 +96,7 @@ export class AppComponent {
     .subscribe({
       next: (response) => {
         console.log('Response:', response);
+        
         this.dataList.splice(i, 1);
         console.log(this.dataList);
       },
