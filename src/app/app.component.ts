@@ -26,39 +26,46 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'my-angular-project';
-  // backendUrl = 'https://psychic-orbit-5gvjxx5gj9jrfq99-8080.app.github.dev';
-  backendUrl = 'http://44.193.168.210:8080';
+   backendUrl = 'https://psychic-orbit-5gvjxx5gj9jrfq99-9090.app.github.dev';
+ // backendUrl = 'http://44.193.168.210:8080';
   dataList: any = [];
+   // Define a property to store the selected file
+   file: File | undefined;
 
-  constructor(private http: HttpClient) {}
+   constructor(private http: HttpClient) { }
  
-  // file upload api
+   // Method to handle file selection
+   onFileChange(event: any) {
+     // Get the selected file
+     console.log("File change")
+     this.file = event.target.files[0];
+   }
+
+  
+  // Method to handle file upload
   fileUpload(): void {
-       // Capture the file input element
-       const fileInput: any = document.querySelector('input[type="file"]') as HTMLInputElement;
-       const file = fileInput.files[0];
+    console.log('Triger===============')
+    if (!this.file) {
+      console.error('No file selected.');
+      return;
+    }
 
-       // Create FormData object and append form data
-        const formData = new FormData();
-   
-      //  formData.append('password', password);
-        formData.append('file', file);
+    // Create FormData object and append form data
+    const formData = new FormData();
+    formData.append('file', this.file);
 
-        
     // Send data to the backend using HttpClient
     this.http.post(`${this.backendUrl}/fileUpload`, formData)
-    .subscribe(
-      response => {
-        console.log('Image uploaded successfull.');
-        // Handle success response from the server
-      },
-      error => {
-        // try catch error handler method
-        console.error('Image is not uploaded successfully.');
-        // Handle error response from the server
-      }
-    );
-
+      .subscribe(
+        response => {
+          console.log('File uploaded successfully.');
+          // Handle success response from the server
+        },
+        error => {
+          console.error('File upload failed.');
+          // Handle error response from the server
+        }
+      );
   }
 
   // creating/sending user data api
