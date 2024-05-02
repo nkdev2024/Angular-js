@@ -30,6 +30,10 @@
     <input type="password" matInput placeholder="password" value="">
   </mat-form-field>
 
+  <input type="file" file-model="vm.file" />
+
+  <button style="margin-right: 5px;" mat-flat-button color="primary" (click)="fileUpload()">Send file</button>
+
   <button mat-flat-button color="primary" (click)="sendData()">Register</button>
 
 </form>
